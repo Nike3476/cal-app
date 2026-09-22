@@ -5,7 +5,7 @@ function TdeeForm({ onCalculate }) {
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
     const [gender, setGender] = useState("");
-    const [activity, setActivity] = useState("");
+    const [activity, setActivity] = useState("sedentary");
     const [tdeeResult, setTdeeResult] = useState(0);
 
 
@@ -39,47 +39,37 @@ function TdeeForm({ onCalculate }) {
         }
     }
 
-
-
     return (
-        <div>
-            <input type="number" value={age} onChange={e => setAge(e.target.value)} placeholder="Enter age"/>
-            <p value={age}>age: {age}</p>
-            <input type="number" value={height} onChange={e => setHeight(e.target.value)} placeholder="Enter height"/>
-            <p value={height}>height: {height}cm</p>
-            <input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="Enter weight"/>
-            <p value={weight}>weight: {weight}kg</p>
-            <select value={gender} onChange={e => setGender(e.target.value)}>
-                <option>male</option>
-                <option>female</option>
-            </select>
-            <select value={activity} onChange={e => setActivity(e.target.value)}>
-                <option>
-                    sedentary
-                </option>
-                <option>
-                    light
-                </option>
-                <option>
-                    moderate
-                </option>
-                <option>
-                    active
-                </option>
-                <option>
-                    very active
-                </option>
-            </select>
-
-            <p>{tdeeResult}</p>
-<button onClick={() => {
-  const result = Math.round(BMR() * ActivityMultiplier());
-  setTdeeResult(result);
-  onCalculate(result);
-}}>BMR</button>
-            {/* this button performs the function of settdeeresult which says multiply bmr and acitvity multiplier */}
-        </div>
-    )
+  <div className="max-w-sm mx-auto mt-6 p-5 rounded-2xl border border-zinc-100 bg-white shadow-sm space-y-3">
+    <input type="number" value={age} onChange={e => setAge(e.target.value)} placeholder="Enter age"
+      className="w-full h-11 rounded-xl border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900" />
+    <input type="number" value={height} onChange={e => setHeight(e.target.value)} placeholder="Enter height"
+      className="w-full h-11 rounded-xl border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900" />
+    <input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="Enter weight"
+      className="w-full h-11 rounded-xl border border-zinc-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900" />
+    <select value={gender} onChange={e => setGender(e.target.value)}
+      className="w-full h-11 rounded-xl border border-zinc-200 px-3 text-sm">
+      <option>male</option>
+      <option>female</option>
+    </select>
+    <select value={activity} onChange={e => setActivity(e.target.value)}
+      className="w-full h-11 rounded-xl border border-zinc-200 px-3 text-sm">
+      <option>sedentary</option>
+      <option>light</option>
+      <option>moderate</option>
+      <option>active</option>
+      <option>very active</option>
+    </select>
+    <p className="text-sm font-semibold text-zinc-900">{tdeeResult}</p>
+    <button onClick={() => {
+      const result = Math.round(BMR() * ActivityMultiplier());
+      setTdeeResult(result);
+      onCalculate(result);
+    }} className="w-full h-11 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-black transition">
+      BMR
+    </button>
+  </div>
+);
 }
 
 export default TdeeForm
